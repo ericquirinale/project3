@@ -197,9 +197,8 @@ void *echo(void *arg)
 
     while ((nread = read(c->fd, buf, BUFSIZE)) > 0) {
         buf[nread] = '\0';
-        nwrite = write(c->fd, "hi", "3");
+        nwrite = write(c->fd, "hi", 3);
         printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
-        send(host, )
     }
 
     printf("[%s:%s] got EOF\n", host, port);
