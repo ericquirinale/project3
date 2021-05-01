@@ -214,7 +214,9 @@ void *echo(void *arg)
             }
             char *tmpKey = malloc(sizeof(key));
             tmpkey=key;
-            get(stor, tmpKey);
+
+            char *val = get(stor, tmpKey);
+            write(c->fd, val, strlen(val));
             break;
           case 'S':
             break;
