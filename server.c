@@ -8,11 +8,13 @@
 #include <netdb.h>
 #include <signal.h>
 #include <pthread.h>
+#include <ctype.h>
 #include "list.h"
 
 #define BACKLOG 5
 
 int running = 1;
+list_t *stor;
 
 // the argument we will pass to the connection-handler threads
 struct connection {
@@ -48,7 +50,7 @@ int server(char *port)
     int error, sfd;
     pthread_t tid;
 
-    list_t *stor = malloc(sizeof(list_t));
+    stor = malloc(sizeof(list_t));
     initLinked(stor);
 
     // initialize hints
@@ -201,19 +203,19 @@ void *echo(void *arg)
 
     while ((nread = read(c->fd, buf, BUFSIZE)) > 0) {
         buf[nread] = '\0';
-        switch (nread[0]) {
+        switch (buf[0]) {
+          int i = 0;
+          int j = 0;
           case 'G':
-            int c = 0;
-            int i = 0;
             while (read(c->fd, buf2, 1)>0){ //add "key" to key
-              if(!isdigit(buf2[c])){
+              if(!isdigit(buf2[j])){
                 key[i] = buf2[2];
                 i++;
               }
-              c++;
+              j++;
             }
             char *tmpKey = malloc(sizeof(key));
-            tmpkey=key;
+            tmpKey=key;
 
             char *val = get(stor, tmpKey);
             write(c->fd, val, strlen(val));
