@@ -13,7 +13,7 @@ typedef struct list_t{
 
 void initLinked(list_t *ll);
 char set(list_t *ll, char *key, char *value);
-char get(list_t *ll, char *key);
+char* get(list_t *ll, char *key);
 char* del(list_t *ll, char *key);
 void displayLinked(list_t *ptr);
 
@@ -28,7 +28,7 @@ char set(list_t *ll, char *key, char *value){ //insert key & value or changes ke
   strcpy(tmpKey, key);
   char *tmpValue = malloc(strlen(value)+1);
   strcpy(tmpValue, value);
-  char oks[4] = "OKS";
+  char oks[4] = "OKS\n";
   int isHead = 1; //head boolean
 
   while (ll->key!=NULL) {
@@ -57,10 +57,87 @@ char set(list_t *ll, char *key, char *value){ //insert key & value or changes ke
       return oks;
     }
     isHead = 0;
+    ll=ll->next;
   }
 
   //list was empty (add info to list head)
   ll->key = tmpKey;
   ll->value = tmpValue;
   return oks;
+}
+
+char *get(list_t *ll, char *key){
+  char okg[4] = "OKG\n";
+  char knf[4] = "KNF\n";
+  char *retValue = malloc(len+15);
+  strcat(retValue, okg);
+
+  while (ll->key!=NULL) {
+    if (strcmp(ll->key, key)==0) { //if key found
+      //create return string
+      int len = strlen(ll->value);
+      strcat(retValue, itoa(len));
+      strcat(retValue, "\n");
+      strcat(retValue, ll->value);
+      strcat(retValue, "\n");
+      return retValue;
+    }
+    if (strcmp(ll->key, key)>0) { //not found
+      return knf;
+    }
+    ll=ll->next;
+  }
+
+  //if head was null
+  return knf;
+}
+
+char* del(list_t *ll, char *key){
+  char okd[4] = "OKD\n";
+  char knf[4] = "KNF\n";
+  char *retValue = malloc(len+15);
+  strcat(retValue, okg);
+
+  list_t *prev = NULL;
+
+  while (ll->key!=NULL) {
+    if (strcmp(ll->key, key)==0) { //if key found
+      //create return string
+      int len = strlen(ll->value);
+      strcat(retValue, itoa(len));
+      strcat(retValue, "\n");
+      strcat(retValue, ll->value);
+      strcat(retValue, "\n");
+
+      //delete key
+      if (prev!=NULL) { //not head
+        prev->next = ll->next;
+      }
+      else{ //delete from head
+        if (ll->next->key!=NULL) {//if more than one key in list
+          ll->key = ll->next->key;
+          ll->value = ll->next->value;
+          ll->next = ll->next->next;
+        }
+        else{ //if only key, set all values to null
+          initLinked(ll);
+        }
+      }
+      return retValue;
+    }
+    if (strcmp(ll->key, key)>0) { //not found
+      return knf;
+    }
+    prev = ll;
+    ll=ll->next;
+  }
+
+  //if head was null
+  return knf;
+}
+
+void displayLinked(list_t *ptr){
+  for (; ptr != NULL; ptr = ptr->next) {
+        printf("%s%s\t%s%s\n", "Key: ", ptr->key, "Value: ", ptr->value);
+    }
 }

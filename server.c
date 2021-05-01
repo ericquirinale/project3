@@ -8,6 +8,7 @@
 #include <netdb.h>
 #include <signal.h>
 #include <pthread.h>
+#include "list.h"
 
 #define BACKLOG 5
 
@@ -46,6 +47,9 @@ int server(char *port)
     struct connection *con;
     int error, sfd;
     pthread_t tid;
+
+    list_t *stor = malloc(sizeof(list_t));
+    initLinked(stor);
 
     // initialize hints
     memset(&hint, 0, sizeof(struct addrinfo));
@@ -172,11 +176,11 @@ int server(char *port)
     return 0;
 }
 
-#define BUFSIZE 8
+#define BUFSIZE 4
 
 void *echo(void *arg)
 {
-    char host[100], port[10], buf[BUFSIZE + 1];
+    char host[100], port[10], buf[BUFSIZE + 1], buf2[100], key[100];
     struct connection *c = (struct connection *) arg;
     int error, nread, nwrite;
 
@@ -197,6 +201,28 @@ void *echo(void *arg)
 
     while ((nread = read(c->fd, buf, BUFSIZE)) > 0) {
         buf[nread] = '\0';
+        switch (nread[0]) {
+          case 'G':
+            int c = 0;
+            int i = 0;
+            while (read(c->fd, buf2, 1)>0){ //add "key" to key
+              if(!isdigit(buf2[c])){
+                key[i] = buf2[2];
+                i++;
+              }
+              c++;
+            }
+            char *tmpKey = malloc(sizeof(key));
+            tmpkey=key;
+            get(stor, tmpKey);
+            break;
+          case 'S':
+            break;
+          case 'D':
+            break;
+          default :
+            break;
+        }
         nwrite = write(c->fd, "hi", 3);
         printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
     }
