@@ -228,7 +228,7 @@ void *echo(void *arg)
           tmpKey=tmp;
 
           char *val = get(stor, tmpKey);
-          printf("%s\n", "before get write");
+          printf("%s%s\n", "before get write: ", val);
           write(c->fd, val, strlen(val));
         }
         else if (strcmp(cmd, "SET")==0) {
