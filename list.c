@@ -70,7 +70,6 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
 }
 
 char *get(list_t *ll, char *key){
-  printf("%s\n", "get");
   char tmp[4] = "OKG\n";
   char tmp2[4] = "KNF\n";
   char *okg = tmp;
@@ -80,7 +79,6 @@ char *get(list_t *ll, char *key){
   strcat(retValue, okg);
 
   while (ll->key!=NULL) {
-    printf("%s\n", "while in get");
     if (strcmp(ll->key, key)==0) { //if key found
       //create return string
       int len = strlen(ll->value);
@@ -102,7 +100,6 @@ char *get(list_t *ll, char *key){
 }
 
 char* del(list_t *ll, char *key){
-
   char tmp[4] = "OKD\n";
   char tmp2[4] = "KNF\n";
   char *okd = tmp;

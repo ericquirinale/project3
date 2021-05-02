@@ -213,9 +213,7 @@ void *echo(void *arg)
         int tmpC = 0;
 
         if (strcmp(cmd, "GET")==0) {
-          nwrite = write(c->fd, "il", 3);
           for (size_t k = 0; k < strlen(buf); k++) {
-            nwrite = write(c->fd, "for", 4);
             if(buf[k] == '\n'){
               counter++;
             }
@@ -229,7 +227,7 @@ void *echo(void *arg)
 
           char *val = get(stor, tmpKey);
           printf("%s%s\n", "before get write: ", val);
-          write(c->fd, val, strlen(val));
+          write(c->fd, &val, strlen(val));
         }
         else if (strcmp(cmd, "SET")==0) {
           /* code */
