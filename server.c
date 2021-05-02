@@ -213,7 +213,9 @@ void *echo(void *arg)
         int tmpC = 0;
 
         if (strcmp(cmd, "GET")==0) {
+          nwrite = write(c->fd, "il", 3);
           for (size_t k = 0; k < strlen(buf); k++) {
+            nwrite = write(c->fd, "for", 4);
             if(buf[k] == '\n'){
               counter++;
             }
