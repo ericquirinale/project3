@@ -208,6 +208,8 @@ void *echo(void *arg)
           int j = 0;
           case 'G':
             while (read(c->fd, buf2, 1)>0){ //add "key" to key
+            printf("%s%s\n", "BUFFER: ", buf2);
+            printf("%s\n", "while");
               if(!isdigit(buf2[j])){
                 key[i] = buf2[2];
                 i++;
@@ -218,6 +220,7 @@ void *echo(void *arg)
             tmpKey=key;
 
             char *val = get(stor, tmpKey);
+            printf("%s\n", "before get write");
             write(c->fd, val, strlen(val));
             break;
           case 'S':
