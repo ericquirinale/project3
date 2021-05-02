@@ -178,7 +178,7 @@ int server(char *port)
     return 0;
 }
 
-#define BUFSIZE 4
+#define BUFSIZE 100
 
 void *echo(void *arg)
 {
@@ -203,32 +203,37 @@ void *echo(void *arg)
 
     while ((nread = read(c->fd, buf, BUFSIZE)) > 0) {
         buf[nread] = '\0';
-        switch (buf[0]) {
-          int i = 0;
-          int j = 0;
-          case 'G':
-            while (read(c->fd, buf2, 1)>0){ //add "key" to key
-            printf("%s%s\n", "BUFFER: ", buf2);
-            printf("%s\n", "while");
-              if(!isdigit(buf2[j])){
-                key[i] = buf2[2];
-                i++;
-              }
-              j++;
-            }
-            char *tmpKey = malloc(sizeof(key));
-            tmpKey=key;
+        char cmd[4]; //holds command
+        for (size_t i = 0; i < 3; i++) {
+          cmd[i] = toupper(buf[i]);
+        }
+        cmd[3] = '\0';
+        int counter = 0;
+        char tmp[100];
+        int tmpC = 0;
 
-            char *val = get(stor, tmpKey);
-            printf("%s\n", "before get write");
-            write(c->fd, val, strlen(val));
-            break;
-          case 'S':
-            break;
-          case 'D':
-            break;
-          default :
-            break;
+        if (strcmp(cmd, "GET")==0) {
+          for (size_t k = 0; k < strlen(buf); k++) {
+            if(buf[k] == '\n'){
+              counter++;
+            }
+            else if(counter==2){
+              tmp[tmpC]=buf[k];
+              tmpC++;
+            }
+          }
+          char *tmpKey = malloc(sizeof(tmp));
+          tmpKey=tmp;
+
+          char *val = get(stor, tmpKey);
+          printf("%s\n", "before get write");
+          write(c->fd, val, strlen(val));
+        }
+        else if (strcmp(cmd, "SET")==0) {
+          /* code */
+        }
+        else if (strcmp(cmd, "DEL")==0) {
+          /* code */
         }
         nwrite = write(c->fd, "hi", 3);
         printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
