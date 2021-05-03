@@ -97,6 +97,7 @@ char *get(list_t *ll, char *key){
       strcat(retValue, slen);
       strcat(retValue, "\n");
       strcat(retValue, ll->value);
+      strcat(retValue, "\n");
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
@@ -110,8 +111,8 @@ char *get(list_t *ll, char *key){
 }
 
 char* del(list_t *ll, char *key){
-  char tmp[4] = "OKD";
-  char tmp2[4] = "KNF";
+  char tmp[4] = "OKD\n";
+  char tmp2[4] = "KNF\n";
   char *okd = tmp;
   char *knf = tmp2;
 
@@ -130,6 +131,7 @@ char* del(list_t *ll, char *key){
       strcat(retValue, slen);
       strcat(retValue, "\n");
       strcat(retValue, ll->value);
+      strcat(retValue, "\n");
       //delete key
       if (prev!=NULL) { //not head
         prev->next = ll->next;
