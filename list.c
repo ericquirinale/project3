@@ -111,8 +111,8 @@ char *get(list_t *ll, char *key){
 }
 
 char* del(list_t *ll, char *key){
-  char tmp[4] = "OKD\n";
-  char tmp2[4] = "KNF\n";
+  char tmp[4] = "OKD";
+  char tmp2[4] = "KNF";
   char *okd = tmp;
   char *knf = tmp2;
 

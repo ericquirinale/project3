@@ -240,7 +240,7 @@ void *echo(void *arg)
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
-          char *retVal = set(stor, tmpVal, tmpKey);
+          char *retVal = set(stor, tmpKey, tmpVal);
 
           write(c->fd, retVal, strlen(retVal));
         }
