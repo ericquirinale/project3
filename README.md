@@ -8,7 +8,7 @@ nc ilab1.cs.rutgers.edu 35355
 SET
 11
 day
-FRiday
+SUNDAY
 
 GET
 4
