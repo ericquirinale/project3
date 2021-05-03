@@ -218,6 +218,8 @@ void *echo(void *arg)
 
         if (strcmp(cmd, "GET")==0) {
           nread = read(c->fd, byteLength, BUFSIZE); //read byteLength
+
+          nread = read(c->fd, tmp, BUFSIZE); //read key
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
