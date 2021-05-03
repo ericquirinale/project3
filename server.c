@@ -225,9 +225,10 @@ void *echo(void *arg)
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
-          char *val = get(stor, tmpKey);
+          char *val = malloc(sizeof(char)*100);
+          val = get(stor, tmpKey);
           printf("%s%s\n", "before get write: ", val);
-          write(c->fd, &val, strlen(val));
+          write(c->fd, val, strlen(val));
         }
         else if (strcmp(cmd, "SET")==0) {
           /* code */
