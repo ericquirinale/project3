@@ -241,9 +241,10 @@ void *echo(void *arg)
           tmpVal=tmp2;
 
           value = set(stor, tmpKey, tmpVal);
-          printf("%s%s\n","set val: ", value);
 
           write(c->fd, value, strlen(value));
+          write(c->fd, value, strlen(value));
+
         }
         else if (strcmp(cmd, "DEL")==0) {
           char byteLength[100];
