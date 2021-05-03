@@ -79,10 +79,10 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
 }
 
 char *get(list_t *ll, char *key){
-  char tmp[4] = "OKG\n";
-  char tmp2[4] = "KNF\n";
-  char *okg = tmp;
-  char *knf = tmp2;
+  char okg[4] = "OKG\n";
+  char knf[4] = "KNF\n";
+  char *okgP = okg;
+  char *knfP = knf;
 
   char *retValue = malloc(strlen(key)+15);
 
@@ -92,7 +92,7 @@ char *get(list_t *ll, char *key){
       int len = strlen(ll->value);
       char slen[5];
       itoa(len, slen, 10);
-      strcat(retValue, okg);
+      strcat(retValue, okgP);
       strcat(retValue, "\n");
       strcat(retValue, slen);
       strcat(retValue, "\n");
@@ -101,13 +101,13 @@ char *get(list_t *ll, char *key){
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
-      return knf;
+      return knfP;
     }
     ll=ll->next;
   }
 
   //if head was null
-  return knf;
+  return knfP;
 }
 
 char* del(list_t *ll, char *key){
