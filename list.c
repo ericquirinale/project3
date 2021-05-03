@@ -101,6 +101,9 @@ char *get(list_t *ll, char *key){
     if (strcmp(ll->key, key)>0) { //not found
       return knfP;
     }
+    else if (ll->next==NULL) {
+      return knfP;
+    }
     ll=ll->next;
   }
 
@@ -146,6 +149,9 @@ char* del(list_t *ll, char *key){
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
+      return knf;
+    }
+    else if (ll->next==NULL) {
       return knf;
     }
     prev = ll;

@@ -225,6 +225,12 @@ void *echo(void *arg)
 
           value = get(stor, tmpKey);
 
+          if (atoi(byteLength)!=strlen(tmpKey)) { //check for length errors
+            write(c->fd, "LEN\n", 4);
+            close(c->fd);
+            free(c);
+          }
+
           write(c->fd, value, strlen(value));
         }
         else if (strcmp(cmd, "SET")==0) {
@@ -240,9 +246,14 @@ void *echo(void *arg)
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
+          if (atoi(byteLength)!=strlen(tmpKey)+strlen(tmpVal)) { //check for length errors
+            write(c->fd, "LEN\n", 4);
+            close(c->fd);
+            free(c);
+          }
           value = set(stor, tmpKey, tmpVal);
 
-          write(c->fd, "OKS\n", strlen(value));
+          write(c->fd, "OKS\n\n", 5);
 
         }
         else if (strcmp(cmd, "DEL")==0) {
@@ -256,10 +267,19 @@ void *echo(void *arg)
 
           value = del(stor, tmpKey);
 
+          if (atoi(byteLength)!=strlen(tmpKey)) { //check for length errors
+            write(c->fd, "LEN\n", 4);
+            close(c->fd);
+            free(c);
+          }
+
           write(c->fd, value, strlen(value));
         }
         else{
-          printf("%s\n", "ERROR, UNKNOWN COMMAND");
+          write(c->fd, "BAD\n", 4); //bad command error
+          close(c->fd);
+          free(c);
+          return NULL;
         }
         printf("%s\n","DISPLAY:" );
         displayLinked(stor);
