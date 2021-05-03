@@ -245,9 +245,6 @@ void *echo(void *arg)
           char *retVal = set(stor, tmp, tmp2);
 
           write(c->fd, retVal, strlen(retVal));
-          free(retVal);
-          free(tmpKey);
-          free(tmpVal);
         }
         else if (strcmp(cmd, "DEL")==0) {
           char byteLength[100];
