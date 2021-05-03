@@ -241,6 +241,7 @@ void *echo(void *arg)
               counter++;
             }
             else if(counter==2){ //key
+              printf("%c\n", buf[k]);
               tmp[tmpC]=buf[k];
               tmpC++;
             }
