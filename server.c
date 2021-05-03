@@ -253,8 +253,8 @@ void *echo(void *arg)
           }
           value = set(stor, tmpKey, tmpVal);
 
-          write(c->fd, value, strlen(value));
-          //write(c->fd, "OKS\n", 4);
+          //write(c->fd, value, strlen(value));
+          write(c->fd, "OKS\n", 4);
 
         }
         else if (strcmp(cmd, "DEL")==0) {
