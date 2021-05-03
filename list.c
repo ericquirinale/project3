@@ -40,7 +40,7 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
       ll->value = tmpValue;
       return oks;
     }
-    if (strcmp(ll->key, key)>0) { //insert alphabetically
+    else if(strcmp(ll->key, key)>0) { //insert alphabetically
       //create new node
       list_t *new = malloc(sizeof(list_t));
       initLinked(new);
@@ -61,6 +61,14 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
 
       }
       return oks;
+    }
+    else if (ll->next==NULL) {//insert at the end
+      list_t *new = malloc(sizeof(list_t));
+      initLinked(new);
+      new->key=tmpKey;
+      new->value=tmpValue;
+      new->next = ll->next;
+      ll->next = new;
     }
     isHead = 0;
     ll=ll->next;
