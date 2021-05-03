@@ -82,7 +82,7 @@ char *get(list_t *ll, char *key){
   char okg[4] = "OKG";
   char knf[4] = "KNF";
   char *okgP = malloc(strlen(okg)+1);
-  char *knfP = malloc(strlen(knf)+1);;
+  char *knfP = malloc(strlen(knf)+1);
   okgP = okg;
   knfP = knf;
 
@@ -102,23 +102,25 @@ char *get(list_t *ll, char *key){
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
-      return knf;
+      return knfP;
     }
     else if (ll->next==NULL) {
-      return knf;
+      return knfP;
     }
     ll=ll->next;
   }
 
   //if head was null
-  return knf;
+  return knfP;
 }
 
 char* del(list_t *ll, char *key){
   char tmp[4] = "OKD";
   char tmp2[4] = "KNF";
-  char *okd = tmp;
-  char *knf = tmp2;
+  char *okd = malloc(strlen(tmp)+1);
+  okd = tmp;
+  char *knf = malloc(strlen(tmp2)+1);
+  knf = tmp2;
 
   char *retValue = malloc(strlen(key)+15);
 
