@@ -202,15 +202,17 @@ void *echo(void *arg)
     printf("[%s:%s] connection\n", host, port);
 
     while ((nread = read(c->fd, buf, BUFSIZE)) > 0) {
-        buf[nread] = '\0';
-        char cmd[4]; //holds command
+        buf[nread] = '\0'; //buf holds the command
+        char cmd[4]; //holds command (get, set, del)
         for (size_t i = 0; i < 3; i++) {
           cmd[i] = toupper(buf[i]);
         }
         cmd[3] = '\0';
-        int counter = 0;
-        char tmp[100];
-        int tmpC = 0;
+        int counter = 0; //counter for number of newlines (breaks payload into sections)
+        char tmp[100]; // for storing key argument
+        int tmpC = 0; //counter for above
+        char tmp2[100]; // for storing value argument in set
+        int tmpC2 = 0; //counter for above
 
         if (strcmp(cmd, "GET")==0) {
           for (size_t k = 0; k < strlen(buf); k++) {
@@ -228,18 +230,62 @@ void *echo(void *arg)
           char *value = get(stor, tmpKey);
           char val[100];
           strcpy(val, value);
-          printf("%s%s\n", "before get write: ", val);
           write(c->fd, val, strlen(val));
+          free(tmpKey);
+          free(value);
         }
         else if (strcmp(cmd, "SET")==0) {
-          /* code */
+          for (size_t k = 0; k < strlen(buf); k++) {
+            if(buf[k] == '\n'){
+              counter++;
+            }
+            else if(counter==2){
+              tmp[tmpC]=buf[k];
+              tmpC++;
+            }
+            else if(counter==3){
+              tmp2[tmpC2]=buf[k];
+              tmpC2++;
+            }
+          }
+          char *tmpKey = malloc(sizeof(tmp));
+          tmpKey=tmp;
+
+          char *tmpVal = malloc(sizeof(tmp2));
+          tmpVal=tmp2;
+
+          char *retVal = get(stor, tmpKey);
+          char ret[100];
+          strcpy(ret, retVal);
+          write(c->fd, ret, strlen(ret));
+          free(tmpKey);
+          free(tmpVal);
+          free(retVal);
         }
         else if (strcmp(cmd, "DEL")==0) {
-          /* code */
+          for (size_t k = 0; k < strlen(buf); k++) {
+            if(buf[k] == '\n'){
+              counter++;
+            }
+            else if(counter==2){
+              tmp[tmpC]=buf[k];
+              tmpC++;
+            }
+          }
+          char *tmpKey = malloc(sizeof(tmp));
+          tmpKey=tmp;
+
+          char *value = get(stor, tmpKey);
+          char val[100];
+          strcpy(val, value);
+          write(c->fd, val, strlen(val));
+          free(tmpKey);
+          free(value);
         }
-        //nwrite = write(c->fd, "hi", 3);
         //printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
     }
+
+
 
     printf("[%s:%s] got EOF\n", host, port);
 
