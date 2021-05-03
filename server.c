@@ -225,8 +225,9 @@ void *echo(void *arg)
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
-          char *val = malloc(sizeof(char)*100);
-          val = get(stor, tmpKey);
+          char *value = get(stor, tmpKey);
+          char val[100];
+          strcpy(val, value);
           printf("%s%s\n", "before get write: ", val);
           write(c->fd, val, strlen(val));
         }
@@ -236,8 +237,8 @@ void *echo(void *arg)
         else if (strcmp(cmd, "DEL")==0) {
           /* code */
         }
-        nwrite = write(c->fd, "hi", 3);
-        printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
+        //nwrite = write(c->fd, "hi", 3);
+        //printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
     }
 
     printf("[%s:%s] got EOF\n", host, port);
