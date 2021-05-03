@@ -231,6 +231,7 @@ void *echo(void *arg)
             free(c);
           }
 
+          printf("%s%s\n", "gvalue: ", value);
           write(c->fd, value, strlen(value));
         }
         else if (strcmp(cmd, "SET")==0) {
@@ -254,6 +255,7 @@ void *echo(void *arg)
           value = set(stor, tmpKey, tmpVal);
 
           //write(c->fd, value, strlen(value));
+          printf("%s%s\n", "svalue: ", value);
           write(c->fd, "OKS\n", 4);
 
         }
@@ -274,6 +276,7 @@ void *echo(void *arg)
             free(c);
           }
 
+          printf("%s%s\n", "dvalue: ", value);
           write(c->fd, value, strlen(value));
         }
         else{
