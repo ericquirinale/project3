@@ -238,7 +238,8 @@ void *echo(void *arg)
         }
         else if (strcmp(cmd, "SET")==0) {
           printf("%s\n", "set\n");
-          char trash[100];
+          char byteLength[100];
+          nread = read(c->fd, byteLength, BUFSIZE);
           /*for (size_t k = 0; k < strlen(buf); k++) {
             printf("%s%c\n", "BUFK: ", buf[k]);
             if(buf[k] == '\n'){
