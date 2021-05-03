@@ -83,8 +83,9 @@ char *get(list_t *ll, char *key){
     if (strcmp(ll->key, key)==0) { //if key found
       //create return string
       int len = strlen(ll->value);
-      char *val = malloc(sizeof(char)*countDigit(len));
-      strcat(retValue, val);
+      strcat(retValue, okg);
+      strcat(retValue, "\n");
+      strcat(retValue, atoi(len));
       strcat(retValue, "\n");
       strcat(retValue, ll->value);
       strcat(retValue, "\n");
