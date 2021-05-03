@@ -214,17 +214,10 @@ void *echo(void *arg)
         int tmpC = 0; //counter for above
         char tmp2[100]; // for storing value argument in set
         int tmpC2 = 0; //counter for above
+        char byteLength[100]; //holds byteLength
 
         if (strcmp(cmd, "GET")==0) {
-          for (size_t k = 0; k < strlen(buf); k++) {
-            if(buf[k] == '\n'){
-              counter++;
-            }
-            else if(counter==2){
-              tmp[tmpC]=buf[k];
-              tmpC++;
-            }
-          }
+          nread = read(c->fd, byteLength, BUFSIZE); //read byteLength
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
@@ -237,30 +230,10 @@ void *echo(void *arg)
           free(value);*/
         }
         else if (strcmp(cmd, "SET")==0) {
-          printf("%s\n", "set\n");
-          char byteLength[100];
-          nread = read(c->fd, byteLength, BUFSIZE);
-          /*for (size_t k = 0; k < strlen(buf); k++) {
-            printf("%s%c\n", "BUFK: ", buf[k]);
-            if(buf[k] == '\n'){
-              printf("%s\n", "counter++");
-              counter++;
-            }
-            else if(counter==2){ //key
-              printf("%c\n", buf[k]);
-              tmp[tmpC]=buf[k];
-              tmpC++;
-            }
-            else if(counter==3){ //value
-              tmp2[tmpC2]=buf[k];
-              tmpC2++;
-            }
-          }*/
-
-          printf("%s\n", "next2");
+          nread = read(c->fd, byteLength, BUFSIZE); //read byteLength
 
           nread = read(c->fd, tmp, BUFSIZE); //read key
-          printf("%s\n", tmp);
+
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
@@ -269,7 +242,6 @@ void *echo(void *arg)
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
-          printf("%s%s\n", "ttemp: ", tmpKey );
           char *retVal = set(stor, tmpKey, tmpVal);
           char ret[100];
           strcpy(ret, retVal);
@@ -279,15 +251,11 @@ void *echo(void *arg)
           free(retVal);*/
         }
         else if (strcmp(cmd, "DEL")==0) {
-          for (size_t k = 0; k < strlen(buf); k++) {
-            if(buf[k] == '\n'){
-              counter++;
-            }
-            else if(counter==2){
-              tmp[tmpC]=buf[k];
-              tmpC++;
-            }
-          }
+          char byteLength[100];
+          nread = read(c->fd, byteLength, BUFSIZE); //read byteLength
+
+          nread = read(c->fd, tmp, BUFSIZE); //read key
+
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
@@ -295,10 +263,11 @@ void *echo(void *arg)
           char val[100];
           strcpy(val, value);
           write(c->fd, val, strlen(val));
-          /*free(tmpKey);
-          free(value);*/
         }
-        printf("%s\n","here:" );
+        else{
+          printf("%s\n", "ERROR, UNKNOWN COMMAND");
+        }
+        printf("%s\n","DISPLAY:" );
         displayLinked(stor);
         //printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
     }

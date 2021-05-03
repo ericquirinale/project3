@@ -26,7 +26,6 @@ void initLinked(list_t *ll){
 }
 
 char* set(list_t *ll, char *key, char *value){ //insert key & value or changes keys value
-  printf("%s\n", "hiset\n");
   char *tmpKey = malloc(sizeof(char)*strlen(key)+1);
   strcpy(tmpKey, key);
   char *tmpValue = malloc(sizeof(char)*strlen(value)+1);
@@ -45,7 +44,6 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
       list_t *new = malloc(sizeof(list_t));
       initLinked(new);
       if (isHead==0) { //if not the head
-        printf("%s\n", "here");
         new->key=tmpKey;
         new->value=tmpValue;
         new->next = ll->next;
