@@ -238,11 +238,11 @@ void *echo(void *arg)
           tmpKey=tmp;
 
           nread = read(c->fd, tmp2, BUFSIZE); //read value
-          printf("%s\n", tmp2);
+
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
-          char *retVal = set(stor, tmpKey, tmpVal);
+          char *retVal = set(stor, tmp, tmp2);
 
           write(c->fd, retVal, strlen(retVal));
           free(retVal);
