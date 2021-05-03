@@ -27,9 +27,9 @@ void initLinked(list_t *ll){
 
 char* set(list_t *ll, char *key, char *value){ //insert key & value or changes keys value
   printf("%s\n", "hiset\n");
-  char *tmpKey = malloc(strlen(key)+1);
+  char tmpKey[strlen(key)+1];
   strcpy(tmpKey, key);
-  char *tmpValue = malloc(strlen(value)+1);
+  schar tmpValue[strlen(value)+1];
   strcpy(tmpValue, value);
   char tmp[4] = "OKS\n";
   char *oks = tmp;
