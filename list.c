@@ -102,16 +102,19 @@ char *get(list_t *ll, char *key){
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
-      return knfP;
+      strcat(retValue, knfP);
+      return retValue;
     }
     else if (ll->next==NULL) {
-      return knfP;
+      strcat(retValue, knfP);
+      return retValue;
     }
     ll=ll->next;
   }
 
   //if head was null
-  return knfP;
+  strcat(retValue, knfP);
+  return retValue;
 }
 
 char* del(list_t *ll, char *key){
@@ -154,17 +157,20 @@ char* del(list_t *ll, char *key){
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
-      return knf;
+      strcat(retValue, okd);
+      return retValue;
     }
     else if (ll->next==NULL) {
-      return knf;
+      strcat(retValue, okd);
+      return retValue;
     }
     prev = ll;
     ll=ll->next;
   }
 
   //if head was null
-  return knf;
+  strcat(retValue, okd);
+  return retValue;
 }
 
 void displayLinked(list_t *ptr){
