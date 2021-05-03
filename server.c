@@ -256,6 +256,7 @@ void *echo(void *arg)
           nread = read(c->fd, buf, BUFSIZE); //read bytes
 
           nread = read(c->fd, tmp, BUFSIZE); //read key
+          printf("%s\n", tmp);
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
