@@ -247,7 +247,7 @@ void *echo(void *arg)
           char *retVal = set(stor, tmpKey, tmpVal);
           char ret[100];
           strcpy(ret, retVal);
-          write(c->fd, ret, strlen(ret));
+          write(c->fd, retVal, strlen(ret));
           /*free(tmpKey);
           free(tmpVal);
           free(retVal);*/
@@ -264,7 +264,7 @@ void *echo(void *arg)
           char *value = del(stor, tmpKey);
           char val[100];
           strcpy(val, value);
-          write(c->fd, val, strlen(val));
+          write(c->fd, value, strlen(val));
         }
         else{
           printf("%s\n", "ERROR, UNKNOWN COMMAND");
