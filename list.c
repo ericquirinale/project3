@@ -26,17 +26,17 @@ void initLinked(list_t *ll){
 }
 
 char* set(list_t *ll, char *key, char *value){ //insert key & value or changes keys value
-  /*char *tmpKey = malloc(sizeof(char)*strlen(key)+1);
+  char *tmpKey = malloc(sizeof(char)*strlen(key)+1);
   strcpy(tmpKey, key);
   char *tmpValue = malloc(sizeof(char)*strlen(value)+1);
-  strcpy(tmpValue, value);*/
+  strcpy(tmpValue, value);
   char tmp[4] = "OKS";
   char *oks = tmp;
   int isHead = 1; //head boolean
 
   while (ll->key!=NULL) {
     if (strcmp(ll->key, key)==0) { //set value if key is found
-      ll->value = value;
+      ll->value = tmpValue;
       return oks;
     }
     else if(strcmp(ll->key, key)>0) { //insert alphabetically
@@ -44,10 +44,8 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
       list_t *new = malloc(sizeof(list_t));
       initLinked(new);
       if (isHead==0) { //if not the head
-        //new->key=tmpKey;
-        //new->value=tmpValue;
-        new->key=key;
-        new->value=value;
+        new->key=tmpKey;
+        new->value=tmpValue;
         new->next = ll->next;
         ll->next = new;
       }
@@ -55,8 +53,8 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
         new->key=ll->key;
         new->value=ll->value;
         new->next = ll->next;
-        ll->key=key;
-        ll->value=value;
+        ll->key=tmpKey;
+        ll->value=tmpValue;
         ll->next = new;
 
       }
@@ -65,8 +63,8 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
     else if (ll->next==NULL) {//insert at the end
       list_t *new = malloc(sizeof(list_t));
       initLinked(new);
-      new->key=key;
-      new->value=value;
+      new->key=tmpKey;
+      new->value=tmpValue;
       new->next = ll->next;
       ll->next = new;
     }
@@ -75,8 +73,8 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
   }
 
   //list was empty (add info to list head)
-  ll->key = key;
-  ll->value = value;
+  ll->key = tmpKey;
+  ll->value = tmpValue;
   return oks;
 }
 
