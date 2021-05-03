@@ -118,13 +118,14 @@ char* del(list_t *ll, char *key){
     if (strcmp(ll->key, key)==0) { //if key found
       //create return string
       int len = strlen(ll->value);
-      char *val = malloc(sizeof(char)*countDigit(len));
-      itoa(len, val, 2);
-      strcat(retValue, val);
+      char slen[5];
+      itoa(len, slen, 10);
+      strcat(retValue, okd);
+      strcat(retValue, "\n");
+      strcat(retValue, slen);
       strcat(retValue, "\n");
       strcat(retValue, ll->value);
       strcat(retValue, "\n");
-
       //delete key
       if (prev!=NULL) { //not head
         prev->next = ll->next;
@@ -139,15 +140,6 @@ char* del(list_t *ll, char *key){
           initLinked(ll);
         }
       }
-      int len = strlen(ll->value);
-      char slen[5];
-      itoa(len, slen, 10);
-      strcat(retValue, okd);
-      strcat(retValue, "\n");
-      strcat(retValue, slen);
-      strcat(retValue, "\n");
-      strcat(retValue, ll->value);
-      strcat(retValue, "\n");
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
