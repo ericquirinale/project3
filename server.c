@@ -282,9 +282,6 @@ void *echo(void *arg)
           free(c);
           return NULL;
         }
-        printf("%s\n","DISPLAY:" );
-        displayLinked(stor);
-        //printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
     }
 
 
