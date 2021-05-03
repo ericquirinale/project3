@@ -29,7 +29,7 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
   printf("%s\n", "hiset\n");
   char tmpKey[strlen(key)+1];
   strcpy(tmpKey, key);
-  schar tmpValue[strlen(value)+1];
+  char tmpValue[strlen(value)+1];
   strcpy(tmpValue, value);
   char tmp[4] = "OKS\n";
   char *oks = tmp;
