@@ -157,11 +157,11 @@ char* del(list_t *ll, char *key){
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
-      strcat(retValue, okd);
+      strcat(retValue, knf);
       return retValue;
     }
     else if (ll->next==NULL) {
-      strcat(retValue, okd);
+      strcat(retValue, knf);
       return retValue;
     }
     prev = ll;
@@ -169,7 +169,7 @@ char* del(list_t *ll, char *key){
   }
 
   //if head was null
-  strcat(retValue, okd);
+  strcat(retValue, knf);
   return retValue;
 }
 
