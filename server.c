@@ -224,12 +224,10 @@ void *echo(void *arg)
           tmpKey=tmp;
 
           char *value = get(stor, tmpKey);
-          char val[100];
 
-          strcpy(val, value);
-          write(c->fd, value, strlen(val));
-          /*free(tmpKey);
-          free(value);*/
+          write(c->fd, value, strlen(value));
+          free(value);
+          free(tmpKey);
         }
         else if (strcmp(cmd, "SET")==0) {
           nread = read(c->fd, byteLength, BUFSIZE); //read byteLength
@@ -245,12 +243,11 @@ void *echo(void *arg)
           tmpVal=tmp2;
 
           char *retVal = set(stor, tmpKey, tmpVal);
-          char ret[100];
-          strcpy(ret, retVal);
-          write(c->fd, retVal, strlen(ret));
-          /*free(tmpKey);
+
+          write(c->fd, retVal, strlen(retVal));
+          free(retVal);
+          free(tmpKey);
           free(tmpVal);
-          free(retVal);*/
         }
         else if (strcmp(cmd, "DEL")==0) {
           char byteLength[100];
@@ -262,9 +259,11 @@ void *echo(void *arg)
           tmpKey=tmp;
 
           char *value = del(stor, tmpKey);
-          char val[100];
-          strcpy(val, value);
-          write(c->fd, value, strlen(val));
+
+          write(c->fd, value, strlen(value));
+
+          free(value);
+          free(tmpKey);
         }
         else{
           printf("%s\n", "ERROR, UNKNOWN COMMAND");
