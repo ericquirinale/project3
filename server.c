@@ -255,7 +255,7 @@ void *echo(void *arg)
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
-          char *retVal = get(stor, tmpKey);
+          char *retVal = set(stor, tmpKey, tmpVal);
           char ret[100];
           strcpy(ret, retVal);
           write(c->fd, ret, strlen(ret));
@@ -276,7 +276,7 @@ void *echo(void *arg)
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
-          char *value = get(stor, tmpKey);
+          char *value = del(stor, tmpKey);
           char val[100];
           strcpy(val, value);
           write(c->fd, val, strlen(val));
