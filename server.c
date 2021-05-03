@@ -227,7 +227,7 @@ void *echo(void *arg)
           char val[100];
 
           strcpy(val, value);
-          write(c->fd, val, strlen(val));
+          write(c->fd, value, strlen(val));
           /*free(tmpKey);
           free(value);*/
         }

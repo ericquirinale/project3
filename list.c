@@ -85,7 +85,6 @@ char *get(list_t *ll, char *key){
   char *knf = tmp2;
 
   char *retValue = malloc(strlen(key)+15);
-  strcat(retValue, okg);
 
   while (ll->key!=NULL) {
     if (strcmp(ll->key, key)==0) { //if key found
@@ -118,7 +117,6 @@ char* del(list_t *ll, char *key){
   char *knf = tmp2;
 
   char *retValue = malloc(strlen(key)+15);
-  strcat(retValue, okd);
 
   list_t *prev = NULL;
 
