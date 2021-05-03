@@ -69,7 +69,6 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
   //list was empty (add info to list head)
   ll->key = tmpKey;
   ll->value = tmpValue;
-  printf("%s%s\n","key: ", tmpKey);
   return oks;
 }
 

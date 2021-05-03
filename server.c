@@ -298,6 +298,7 @@ void *echo(void *arg)
           /*free(tmpKey);
           free(value);*/
         }
+        printf("%s\n","here:" );
         displayLinked(stor);
         //printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
     }
