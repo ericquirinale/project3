@@ -229,7 +229,8 @@ void *echo(void *arg)
           tmpKey=tmp;
 
           char *value = get(stor, tmpKey);
-          char val[100];
+          char val[100]. trash[100];
+
           strcpy(val, value);
           write(c->fd, val, strlen(val));
           /*free(tmpKey);
@@ -253,7 +254,8 @@ void *echo(void *arg)
               tmpC2++;
             }
           }*/
-          nread = read(c->fd, buf, BUFSIZE); //read bytes
+
+          printf("%s\n", "next2");
 
           nread = read(c->fd, tmp, BUFSIZE); //read key
           printf("%s\n", tmp);
@@ -261,6 +263,7 @@ void *echo(void *arg)
           tmpKey=tmp;
 
           nread = read(c->fd, tmp2, BUFSIZE); //read value
+          printf("%s\n", tmp2);
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
