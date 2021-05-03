@@ -253,13 +253,13 @@ void *echo(void *arg)
               tmpC2++;
             }
           }*/
-          nread = read(c->fd, buf, BUFSIZE)); //read bytes
+          nread = read(c->fd, buf, BUFSIZE); //read bytes
 
-          nread = read(c->fd, tmp, BUFSIZE)); //read key
+          nread = read(c->fd, tmp, BUFSIZE); //read key
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
-          nread = read(c->fd, tmp2, BUFSIZE)); //read value
+          nread = read(c->fd, tmp2, BUFSIZE); //read value
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
