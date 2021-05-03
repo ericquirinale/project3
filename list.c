@@ -30,7 +30,8 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
   char *tmpValue = malloc(sizeof(char)*strlen(value)+1);
   strcpy(tmpValue, value);
   char tmp[4] = "OKS";
-  char *oks = tmp;
+  char *oks = malloc(strlen(tmp)+1);
+  oks = tmp;
   int isHead = 1; //head boolean
 
   while (ll->key!=NULL) {
@@ -80,8 +81,10 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
 char *get(list_t *ll, char *key){
   char okg[4] = "OKG";
   char knf[4] = "KNF";
-  char *okgP = okg;
-  char *knfP = knf;
+  char *okgP = malloc(strlen(okg)+1);
+  char *knfP = malloc(strlen(knf)+1);;
+  okgP = okg;
+  knfP = knf;
 
   char *retValue = malloc(strlen(key)+15);
 
@@ -99,16 +102,16 @@ char *get(list_t *ll, char *key){
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
-      return knfP;
+      return knf;
     }
     else if (ll->next==NULL) {
-      return knfP;
+      return knf;
     }
     ll=ll->next;
   }
 
   //if head was null
-  return knfP;
+  return knf;
 }
 
 char* del(list_t *ll, char *key){
