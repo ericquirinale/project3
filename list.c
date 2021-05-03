@@ -50,13 +50,15 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
         new->next = ll->next;
         ll->next = new;
       }
-      else{ //insert at front
+      else { //insert at front
         new->key=ll->key;
         new->value=ll->value;
         new->next = ll->next;
         ll->key=tmpKey;
+        printf("%s%s\n","key: ", tmpKey);
         ll->value=tmpValue;
         ll->next = new;
+        
       }
       return oks;
     }
