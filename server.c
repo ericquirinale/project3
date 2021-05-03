@@ -258,8 +258,8 @@ void *echo(void *arg)
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
-          printf("%s%s\n", "ttemp: ", tmp );
-          char *retVal = set(stor, tmp, tmp2);
+          printf("%s%s\n", "ttemp: ", tmpKey );
+          char *retVal = set(stor, tmpKey, tmpVal);
           char ret[100];
           strcpy(ret, retVal);
           write(c->fd, ret, strlen(ret));
