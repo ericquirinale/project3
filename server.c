@@ -231,10 +231,11 @@ void *echo(void *arg)
           char val[100];
           strcpy(val, value);
           write(c->fd, val, strlen(val));
-          free(tmpKey);
-          free(value);
+          /*free(tmpKey);
+          free(value);*/
         }
         else if (strcmp(cmd, "SET")==0) {
+          printf("%s\n", "set\n");
           for (size_t k = 0; k < strlen(buf); k++) {
             if(buf[k] == '\n'){
               counter++;
@@ -258,9 +259,9 @@ void *echo(void *arg)
           char ret[100];
           strcpy(ret, retVal);
           write(c->fd, ret, strlen(ret));
-          free(tmpKey);
+          /*free(tmpKey);
           free(tmpVal);
-          free(retVal);
+          free(retVal);*/
         }
         else if (strcmp(cmd, "DEL")==0) {
           for (size_t k = 0; k < strlen(buf); k++) {
@@ -279,8 +280,8 @@ void *echo(void *arg)
           char val[100];
           strcpy(val, value);
           write(c->fd, val, strlen(val));
-          free(tmpKey);
-          free(value);
+          /*free(tmpKey);
+          free(value);*/
         }
         //printf("[%s:%s] read %d bytes |%s|\n", host, port, nread, buf);
     }
