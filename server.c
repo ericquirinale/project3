@@ -229,7 +229,7 @@ void *echo(void *arg)
           tmpKey=tmp;
 
           char *value = get(stor, tmpKey);
-          char val[100]. trash[100];
+          char val[100];
 
           strcpy(val, value);
           write(c->fd, val, strlen(val));
@@ -238,6 +238,7 @@ void *echo(void *arg)
         }
         else if (strcmp(cmd, "SET")==0) {
           printf("%s\n", "set\n");
+          char trash[100];
           /*for (size_t k = 0; k < strlen(buf); k++) {
             printf("%s%c\n", "BUFK: ", buf[k]);
             if(buf[k] == '\n'){
