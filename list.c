@@ -97,7 +97,6 @@ char *get(list_t *ll, char *key){
       strcat(retValue, slen);
       strcat(retValue, "\n");
       strcat(retValue, ll->value);
-      strcat(retValue, "\n");
       return retValue;
     }
     if (strcmp(ll->key, key)>0) { //not found
@@ -131,13 +130,12 @@ char* del(list_t *ll, char *key){
       strcat(retValue, slen);
       strcat(retValue, "\n");
       strcat(retValue, ll->value);
-      strcat(retValue, "\n");
       //delete key
       if (prev!=NULL) { //not head
         prev->next = ll->next;
       }
       else{ //delete from head
-        if (ll->next->key!=NULL) {//if more than one key in list
+        if (ll->next!=NULL) {//if more than one key in list
           ll->key = ll->next->key;
           ll->value = ll->next->value;
           ll->next = ll->next->next;

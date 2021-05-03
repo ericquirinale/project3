@@ -215,6 +215,7 @@ void *echo(void *arg)
         char tmp2[100]; // for storing value argument in set
         int tmpC2 = 0; //counter for above
         char byteLength[100]; //holds byteLength
+        char *value; //holds function return (get, set, del)
 
         if (strcmp(cmd, "GET")==0) {
           nread = read(c->fd, byteLength, BUFSIZE); //read byteLength
@@ -223,7 +224,7 @@ void *echo(void *arg)
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
-          char *value = get(stor, tmpKey);
+          value = get(stor, tmpKey);
 
           write(c->fd, value, strlen(value));
         }
@@ -240,9 +241,9 @@ void *echo(void *arg)
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
-          char *retVal = set(stor, tmpKey, tmpVal);
+          value = set(stor, tmpKey, tmpVal);
 
-          write(c->fd, retVal, strlen(retVal));
+          write(c->fd, value, strlen(value));
         }
         else if (strcmp(cmd, "DEL")==0) {
           char byteLength[100];
@@ -253,7 +254,7 @@ void *echo(void *arg)
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
-          char *value = del(stor, tmpKey);
+          value = del(stor, tmpKey);
 
           write(c->fd, value, strlen(value));
         }
