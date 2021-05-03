@@ -203,7 +203,6 @@ void *echo(void *arg)
 
     while ((nread = read(c->fd, buf, BUFSIZE)) > 0) {
         buf[nread] = '\0'; //buf holds the command
-        printf("%s%s\n", "BUF: ", buf);
         char cmd[4]; //holds command (get, set, del)
         for (size_t i = 0; i < 3; i++) {
           cmd[i] = toupper(buf[i]);
@@ -242,6 +241,7 @@ void *echo(void *arg)
           tmpVal=tmp2;
 
           value = set(stor, tmpKey, tmpVal);
+          printf("%s%s\n","set val: ", value);
 
           write(c->fd, value, strlen(value));
         }

@@ -17,7 +17,6 @@ char* get(list_t *ll, char *key);
 char* del(list_t *ll, char *key);
 void displayLinked(list_t *ptr);
 char* itoa(int value, char* result, int base);
-int countDigit(long long n);
 
 void initLinked(list_t *ll){
   ll->key = NULL;
@@ -191,15 +190,4 @@ char* itoa(int value, char* result, int base) {
 		*ptr1++ = tmp_char;
 	}
 	return result;
-}
-
-int countDigit(long long n)
-{
-    int count = 0;
-    while (n != 0)
-    {
-        n = n / 10;
-        ++count;
-    }
-    return count;
 }
