@@ -79,8 +79,8 @@ char* set(list_t *ll, char *key, char *value){ //insert key & value or changes k
 }
 
 char *get(list_t *ll, char *key){
-  char okg[4] = "OKG\n";
-  char knf[4] = "KNF\n";
+  char okg[4] = "OKG";
+  char knf[4] = "KNF";
   char *okgP = okg;
   char *knfP = knf;
 
