@@ -237,7 +237,7 @@ void *echo(void *arg)
         }
         else if (strcmp(cmd, "SET")==0) {
           printf("%s\n", "set\n");
-          for (size_t k = 0; k < strlen(buf); k++) {
+          /*for (size_t k = 0; k < strlen(buf); k++) {
             printf("%s%c\n", "BUFK: ", buf[k]);
             if(buf[k] == '\n'){
               printf("%s\n", "counter++");
@@ -252,10 +252,14 @@ void *echo(void *arg)
               tmp2[tmpC2]=buf[k];
               tmpC2++;
             }
-          }
+          }*/
+          nread = read(c->fd, buf, BUFSIZE)); //read bytes
+
+          nread = read(c->fd, tmp, BUFSIZE)); //read key
           char *tmpKey = malloc(sizeof(tmp));
           tmpKey=tmp;
 
+          nread = read(c->fd, tmp2, BUFSIZE)); //read value
           char *tmpVal = malloc(sizeof(tmp2));
           tmpVal=tmp2;
 
