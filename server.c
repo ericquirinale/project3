@@ -240,11 +240,11 @@ void *echo(void *arg)
             if(buf[k] == '\n'){
               counter++;
             }
-            else if(counter==2){
+            else if(counter==2){ //key
               tmp[tmpC]=buf[k];
               tmpC++;
             }
-            else if(counter==3){
+            else if(counter==3){ //value
               tmp2[tmpC2]=buf[k];
               tmpC2++;
             }
@@ -256,7 +256,7 @@ void *echo(void *arg)
           tmpVal=tmp2;
 
           printf("%s%s\n", "ttemp: ", tmpKey );
-          char *retVal = set(stor, tmpKey, tmpVal);
+          char *retVal = set(stor, tmp, tmp2);
           char ret[100];
           strcpy(ret, retVal);
           write(c->fd, ret, strlen(ret));
